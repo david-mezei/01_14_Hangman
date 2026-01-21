@@ -22,19 +22,23 @@ Y88b  d88P 888 Y88b.  Y88b 888 Y88b  d88P Y88b 888 Y8b.          X88      X88 88
     print("Welcome to our game!")
     print("You can choose from 3 difficulties:")
     rprint("[#00C8FF] - 1. Easy (Only Countries) [/#00C8FF]")
-    rprint("[#00FF51] - 2. Hard (Countries and capitals; >10 characters) [/#00FF51]")
-    rprint("[#E30E0E] - 3. Hardcore (Countries and capitals; 10+ characters) [/#E30E0E]")
+    rprint("[#CF34EB] - 2. Medium (Countries; 10+ characters) [/#CF34EB]")
+    rprint("[#00FF51] - 3. Hard (Countries and capitals; >10 characters) [/#00FF51]")
+    rprint("[#E30E0E] - 4. Hardcore (Countries and capitals; 10+ characters) [/#E30E0E]")
 
     print("-----------------------------------")
     try:
-        jatekmod = int(input("Which one do you want to try? (1, 2, 3) "))
+        jatekmod = int(input("Which one do you want to try? (1, 2, 3, 4) "))
         if jatekmod == 1:
             gamemode_easy()
         elif jatekmod == 2:
+            gamemode_medium()
+        elif jatekmod == 3:
             gamemode_hard()
         else:
             gamemode_hardcore()
     except ValueError:
-        print("Please enter a correct number! (1-3)")
+        print("Please enter a correct number! (1-4)")
 
-main_menu()
+if __name__ == "__main__":
+    main_menu()
