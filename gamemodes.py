@@ -1,5 +1,6 @@
 import random
 from country_list import *
+from ascii import *
 
 all_countries_less_than_ten = get_countries_less_than_ten()
 
@@ -12,6 +13,7 @@ def gamemode_easy():
     chosen = "TESZT"
     
     max_wrong_guesses = 6  # limit for wrong guesses
+    wrong_guesses = 0
 
     while True:
         # Show current state of the word
@@ -53,6 +55,14 @@ def gamemode_easy():
         # Show the updated word immediately
         display = " ".join(letter if letter in right_letters else "_" for letter in chosen)
         print(f"Current word: {display}")
+
+        # Inside your game loop:
+        if guess not in display:
+            wrong_guesses += 1
+            print("Rossz tipp!")
+
+        # To display the current state:
+        print(HANGMANPICS[wrong_guesses])
 
 
 def gamemode_medium():
