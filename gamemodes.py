@@ -9,8 +9,8 @@ def gamemode_easy():
     right_letters = set()
 
     # For testing, fixed word
-    # chosen = random.choice(all_countries_less_than_ten)
-    chosen = "TESZT"
+    chosen = random.choice(all_countries_less_than_ten)
+    # chosen = "TESZT"
     
     max_wrong_guesses = 6  # limit for wrong guesses
     wrong_guesses = 0
