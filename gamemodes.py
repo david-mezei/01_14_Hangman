@@ -8,61 +8,49 @@ def gamemode_easy():
     wrong_letters = set()
     right_letters = set()
 
-    # For testing, fixed word
     chosen = random.choice(all_countries_less_than_ten).upper()
-    # chosen = "TESZT"
-    
-    max_wrong_guesses = 6  # limit for wrong guesses
+    max_wrong_guesses = 6
     wrong_guesses = 0
 
     while True:
-        # Show current state of the word
+        # show the current state
         display = " ".join(letter if letter in right_letters else "_" for letter in chosen)
-        print(f"\nWord: {display}")
-        print(f"Wrong guesses: {', '.join(sorted(wrong_letters))}")
+        print("\nWord: " + display)
+        print("Wrong guesses: " + ", ".join(sorted(wrong_letters)))
 
-        # Check if user has guessed the word
+        # win check
         if "_" not in display:
-            print(f"Congratulations! You guessed the word: {chosen}")
+            print(f"\nCongratulations! You guessed the word: {chosen}")
             break
 
-        # Check if user has too many wrong guesses
-        if len(wrong_letters) >= max_wrong_guesses:
-            print(f"Game over! The word was: {chosen}")
+        # lose check
+        if wrong_guesses >= max_wrong_guesses:
+            print(f"\nGame over! The word was: {chosen}")
             break
 
-        # Get user input
         guess = input("Take a guess: ").upper()
 
-        # Validate input
+        # input validation
         if len(guess) != 1 or not guess.isalpha():
             print("Please enter a single letter.")
             continue
 
-        # Check if already guessed
+        # already guessed
         if guess in right_letters or guess in wrong_letters:
             print("You already guessed that letter.")
             continue
 
-        # Add guess to right or wrong letters
+        # handle guess
         if guess in chosen:
             right_letters.add(guess)
-            print(f"Good job! {guess} is in the word.")
+            print(f"\nGood job! {guess} is in the word.")
         else:
             wrong_letters.add(guess)
-            print(f"Sorry, {guess} is not in the word.")
-
-        # Show the updated word immediately
-        display = " ".join(letter if letter in right_letters else "_" for letter in chosen)
-        print(f"Current word: {display}")
-
-        # Inside your game loop:
-        if guess not in display:
             wrong_guesses += 1
-            print("Rossz tipp!")
+            print(f"\nSorry, {guess} is not in the word.")
 
-        # To display the current state:
         print(HANGMANPICS[wrong_guesses])
+
 
 
 def gamemode_medium():
