@@ -1,5 +1,6 @@
 from rich import print as rprint
 from gamemodes import *
+import sys
 def main_menu():
     print("""
           
@@ -25,16 +26,17 @@ Y88b  d88P 888 Y88b.  Y88b 888 Y88b  d88P Y88b 888 Y8b.          X88      X88 88
     rprint("[#CF34EB] - 2. Medium (Countries; 10+ characters) [/#CF34EB]")
     rprint("[#00FF51] - 3. Hard (Countries and capitals; <10 characters) [/#00FF51]")
     rprint("[#E30E0E] - 4. Hardcore (Countries and capitals; 10+ characters) [/#E30E0E]")
+    rprint("[#E4E809] - 5. Quit the game [/#E4E809]")
 
     print("-----------------------------------")
 
     # folyamatos input ellenőrzés
     while True:
         try:
-            jatekmod = int(input("Which one do you want to try? (1, 2, 3, 4) "))
-            if 1 <= jatekmod <= 4:
+            jatekmod = int(input("Which one do you want to try? (1, 2, 3, 4, 5 to quit) "))
+            if 1 <= jatekmod <= 5:
                 break
-            print("Please enter a correct number! (1-4)")
+            print("Please enter a correct number! (1-5)")
         except ValueError:
             print("Please enter a number!")
 
@@ -44,5 +46,8 @@ Y88b  d88P 888 Y88b.  Y88b 888 Y88b  d88P Y88b 888 Y8b.          X88      X88 88
         gamemode_medium()
     elif jatekmod == 3:
         gamemode_hard()
-    else:
+    elif jatekmod == 4:
         gamemode_hardcore()
+    elif jatekmod == 5:
+        print("Goodbye! 👋")
+        sys.exit()

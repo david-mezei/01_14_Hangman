@@ -42,7 +42,7 @@ def handle_guess(guess, chosen_word, right_letters, wrong_letters):
 # játék újraindítása
 def handle_restart():
     from main_menu import main_menu
-    restart = input("Do you want to go back to main menu? (Type [yes] or [y]) ")
+    restart = input("Do you want to go back to main menu? (yes/no) ")
     if restart in ["y", "yes"]:
         main_menu()
     else:
@@ -60,7 +60,11 @@ def play_game(words, max_wrong_guesses):
     wrong_letters = set()
     wrong_guesses = 0
 
+
     while True:
+        lives_left = max_wrong_guesses - wrong_guesses
+        print(f"\nLives left: {lives_left}/{max_wrong_guesses}")
+
         display = get_display_word(chosen_word, right_letters)
         print("\nWord:", display)
         print("Wrong guesses:", ", ".join(sorted(wrong_letters)))
