@@ -189,6 +189,14 @@ def get_countries_less_than_ten():
     country_list = get_countries()
     less_than_ten = []
     for country in country_list:
-        if len(country) < 10:
+        if len(country) <= 10:
             less_than_ten.append(country)
     return less_than_ten
+
+def get_countries_more_than_ten():
+    country_list = get_countries()
+    more_than_ten = []
+    for country in country_list:
+        if len(country) > 10:
+            more_than_ten.append(country)
+    return more_than_ten 

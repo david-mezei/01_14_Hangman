@@ -1,18 +1,22 @@
-import random
 from country_list import *
-from ascii import *
+from contry_and_capital_list import *
+from rich import print as rprint
+import sys
 
 all_countries_less_than_ten = get_countries_less_than_ten()
+all_countries_more_than_ten = get_countries_more_than_ten()
+all_countries_cities_less_than_ten = get_cc_less_than_ten()
+all_countries_cities_more_than_ten = get_cc_more_than_ten()
 
 # szó megjelenítése, titkosítása
 def get_display_word(chosen_word, right_letters):
     return " ".join(
-        letter if letter in right_letters else "_"
+        letter if letter in right_letters or letter in {" ", "|"} else "_" # kihagyja a titkosításból a szóköz és | karaktert
         for letter in chosen_word)
 
 # bemenet ellenőrzése
 def get_valid_guess(used_letters):
-    guess = input("Take a guess: ").upper()
+    guess = input("Take a guess: ").strip().upper()
 
     if len(guess) != 1 or not guess.isalpha():
         print("Please enter a single letter.")
@@ -28,12 +32,22 @@ def get_valid_guess(used_letters):
 def handle_guess(guess, chosen_word, right_letters, wrong_letters):
     if guess in chosen_word:
         right_letters.add(guess)
-        print(f"\nGood job! {guess} is in the word.")
+        rprint(f"\n[green]Good job! {guess} is in the word.[/green]")
         return False  # nem volt rossz tipp
     else:
         wrong_letters.add(guess)
-        print(f"\nSorry, {guess} is not in the word.")
+        rprint(f"\n[red]Sorry, {guess} is not in the word.[/red]")
         return True  # rossz tipp
+
+# játék újraindítása
+def handle_restart():
+    from main_menu import main_menu
+    restart = input("Do you want to go back to main menu? (Type [yes] or [y]) ")
+    if restart in ["y", "yes"]:
+        main_menu()
+    else:
+        print("Thanks for playing!")
+        sys.exit()
 
 # játék motor
 def play_game(words, max_wrong_guesses):
@@ -54,12 +68,14 @@ def play_game(words, max_wrong_guesses):
 
         # win
         if "_" not in display:
-            print(f"\nYou won! The word was: {chosen_word}")
+            print(f"\nYou won! The word was: {chosen_word} 🎉")
+            handle_restart()
             break
 
         # lose
         if wrong_guesses >= max_wrong_guesses:
-            print(f"\nGame over! The word was: {chosen_word}")
+            print(f"\nGame over! The word was: {chosen_word} 🙄")
+            handle_restart()
             break
 
         guess = get_valid_guess(right_letters | wrong_letters) # |: két set uniója
@@ -78,11 +94,12 @@ def play_game(words, max_wrong_guesses):
 
 def gamemode_easy():
     play_game(all_countries_less_than_ten, max_wrong_guesses=6)
+    
 def gamemode_medium():
-    print("MEDIUM")
+    play_game(all_countries_more_than_ten, max_wrong_guesses=6)
 
 def gamemode_hard():
-    print("HARD")
+    play_game(all_countries_cities_less_than_ten, max_wrong_guesses=6)
 
 def gamemode_hardcore():
-    print("HARDCORE")
+    play_game(all_countries_cities_more_than_ten, max_wrong_guesses=6)

@@ -185,3 +185,30 @@ def countries_and_capitals():
     "Zimbabwe | Harare"
     ]
 
+def get_cc_less_than_ten():
+    cc_list = countries_and_capitals()
+    less_than_ten = []
+
+    for entry in cc_list:
+        country, capital = entry.split("|")
+        country = country.strip()
+        capital = capital.strip()
+
+        if len(country) <= 10 or len(capital) <= 10:
+            less_than_ten.append(entry)
+
+    return less_than_ten
+
+def get_cc_more_than_ten():
+    cc_list = countries_and_capitals()
+    more_than_ten = []
+
+    for entry in cc_list:
+        country, capital = entry.split("|")
+        country = country.strip()
+        capital = capital.strip()
+
+        if len(country) > 10 or len(capital) > 10:
+            more_than_ten.append(entry)
+
+    return more_than_ten

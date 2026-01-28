@@ -1,4 +1,5 @@
-from country_list import get_countries
+from main_menu import *
 
-countries = get_countries()
-print(countries)
+# Ezt a fájlt csak a játék indítására használjuk.
+if __name__ == "__main__":
+    main_menu()
