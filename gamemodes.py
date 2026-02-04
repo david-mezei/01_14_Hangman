@@ -2,6 +2,7 @@ from country_list import *
 from contry_and_capital_list import *
 from rich import print as rprint
 import sys
+from playsound3 import playsound
 
 all_countries_less_than_ten = get_countries_less_than_ten()
 all_countries_more_than_ten = get_countries_more_than_ten()
@@ -74,12 +75,14 @@ def play_game(words, max_wrong_guesses):
         if "_" not in display:
             print(f"\nYou won! The word was: {chosen_word} 🎉")
             handle_restart()
+            playsound("sounds/win.mp3")
             break
 
         # lose
         if wrong_guesses >= max_wrong_guesses:
             print(f"\nGame over! The word was: {chosen_word} 🙄")
             handle_restart()
+            playsound("sounds/lose.mp3")
             break
 
         guess = get_valid_guess(right_letters | wrong_letters) # |: két set uniója
