@@ -74,15 +74,15 @@ def play_game(words, max_wrong_guesses):
         # win
         if "_" not in display:
             print(f"\nYou won! The word was: {chosen_word} 🎉")
-            handle_restart()
             playsound("sounds/win.mp3")
+            handle_restart()
             break
 
         # lose
         if wrong_guesses >= max_wrong_guesses:
             print(f"\nGame over! The word was: {chosen_word} 🙄")
-            handle_restart()
             playsound("sounds/lose.mp3")
+            handle_restart()
             break
 
         guess = get_valid_guess(right_letters | wrong_letters) # |: két set uniója
